@@ -29,4 +29,15 @@ def ajout_post(request):
         form =  formulaire()
     return render(request,'blog\Forms.html', {'form':form})
 
+def delete(request,id):
+    post=Post.objects.get(id=id)
+    post.delete()
+    return  redirect('post_list')
+
+def index(request):
+    return render(request, 'blog\index.html')
+
+def blog(request):
+    return render(request, 'blog\Blog.html')
+
 # Create your views here.

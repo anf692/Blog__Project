@@ -49,8 +49,9 @@
     .container{
       padding: 80px;
     }
-    .detail a{
-      background-color: #055f0d ;
+    .detail{
+      justify-content: center;
+      display: flex;
       text-align: center;
     }
     .detail a:hover{
@@ -90,7 +91,15 @@
                 <p class="card-text">{{ post.content }}</p>
                 <small class="text-body-secondary">Publié le {{ post.created_at }}</small>
                 <div class="detail">
-                  <a href="{% url 'post_detail'  post.id %}" class="btn btn-success">Voir plus</a>
+                  <div>
+                    <a href="{% url 'post_detail'  post.id %}" class="btn btn-primary">Voir plus</a>
+                  </div>
+                  <div>
+                    <a href="" class="btn btn-success">Modifier</a>
+                  </div>
+                  <div>
+                    <a href="{% url 'supprimer' post.id %}" class="btn btn-danger" >Supprimer</a>
+                  </div>
                 </div>
               </div>
             </div>
