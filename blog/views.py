@@ -4,8 +4,10 @@ from .forms import formulaire
 
 #fonction pour afficher les differentes postes
 def post_list(request):
-    posts = Post.objects.all().order_by('-created_at')
-    return render(request, 'blog\post_list.html', {'posts': posts})
+    # posts = Post.objects.all().order_by('-created_at')
+    # return render(request, 'blog\post_list.html', {'posts': posts})
+    return render(request, 'blog\post_list.html')
+
 
 #fonction pour afficher les details de chaque poste
 def post_detail(request, id):
@@ -23,21 +25,26 @@ def ajout_post(request):
         if form.is_valid():
             form.save()
             # Rediriger vers la page des postes
-            return redirect('post_list')
+            return redirect('blog')
     else:
         # Si la méthode de requête est GET, afficher un formulaire vide
         form =  formulaire()
     return render(request,'blog\Forms.html', {'form':form})
 
+#fonction pour supprimer un poste
 def delete(request,id):
     post=Post.objects.get(id=id)
     post.delete()
-    return  redirect('post_list')
+    return  redirect('blog')
 
+#fonction pour la page index.html
 def index(request):
     return render(request, 'blog\index.html')
 
+#fonction pour la page Blog.html
 def blog(request):
-    return render(request, 'blog\Blog.html')
+    posts = Post.objects.all().order_by('-created_at')
+    return render(request, 'blog\Blog.html', {'posts': posts})
+    
 
 # Create your views here.
