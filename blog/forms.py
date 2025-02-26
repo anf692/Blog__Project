@@ -1,7 +1,6 @@
-from django.forms import ModelForm
 from django import forms
+from django.forms import ModelForm
 from .models import Post
-
 #class pour creer le formulaire genere par django(plus securisé que les formulairs personnalisé avec html)
 class formulaire(ModelForm):
     class Meta:
@@ -15,7 +14,7 @@ class formulaire(ModelForm):
                 }
             ),
 
-            'content': forms.TextInput(
+            'content': forms.Textarea(
                 attrs={
                     'placeholder': 'Entrez votre contenue',
                     'class':'form-control'

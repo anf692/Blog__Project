@@ -31,11 +31,26 @@ def ajout_post(request):
         form =  formulaire()
     return render(request,'blog\Forms.html', {'form':form})
 
+#fonction pour modifier une articles
+def modifier(request, id):
+    post = get_object_or_404(Post, id=id)
+    if request.method == "POST":
+        form = formulaire (request.POST, instance= post)
+        if form.is_valid():
+            form.save()
+            return redirect('post_list')
+    else:
+        form = formulaire (instance= post)
+    return render(request, 'blog/modifier.html', {'form': form, 'post': post})
+
 #fonction pour supprimer un poste
-def delete(request,id):
-    post=Post.objects.get(id=id)
-    post.delete()
-    return  redirect('blog')
+def supprimer(request, id):
+    post = get_object_or_404(Post, id=id)
+    if request.method == "POST":
+        post.delete()
+        return redirect('blog')
+    return render(request, 'blog/supprimer.html', {'post': post})
+
 
 #fonction pour la page index.html
 def index(request):
